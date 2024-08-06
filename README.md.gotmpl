@@ -1,0 +1,59 @@
+# ICOS Agent
+
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+
+The ICOS Agent is responsible for managing the continuum (keeping track of the topology and availability of the current system) and the run-time (launching and monitoring the execution of services on-demand). Each ICOS Controller manages a set of Agents based on a proximity criteria; hence, ICOS Controllers are deployed on resource-rich computing facilities along the continuum to cover the whole geographical area.
+
+This repository contains all the necessary information to install and deploy the ICOS Agent in a Kubernetes cluster.
+
+
+{{ template "chart.homepageLine" . }}
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+
+## Install Chart
+This creates the release and instantiates all the Kubernetes components associated with the ICOS Agent.
+```console
+helm install [RELEASE_NAME] icos-agent
+```
+
+_See [values](#Values) below._
+
+_See [helm install](https://helm.sh/docs/helm/helm_install/) for command documentation._
+
+{{ template "chart.valuesSection" . }}
+
+
+## Uninstall Chart
+This removes all the Kubernetes components associated with the ICOS Agent and deletes the release.
+```console
+helm uninstall [RELEASE_NAME]
+```
+_See [helm uninstall](https://helm.sh/docs/helm/helm_uninstall/) for command documentation._
+
+## Configuration
+See [Customizing the Chart Before Installing](https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing). To see all configurable options with detailed comments, visit the chart's [values.yaml](./values.yaml), or run these configuration commands:
+
+```console
+helm show values icos-agent
+```
+
+You may similarly use the above configuration commands on each chart [dependency](#dependencies) to see its configurations.
+
+# Legal
+The ICOS Agent is released under the Apache 2.0 license.
+Copyright © 2022-2024 ICOS. All rights reserved.
+
+🇪🇺 This work has received funding from the European Union's HORIZON research and innovation programme under grant agreement No. 101070177.
+
+{{ template "helm-docs.versionFooter" . }}

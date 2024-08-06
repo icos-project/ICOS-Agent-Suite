@@ -1,0 +1,19 @@
+apiVersion: v2
+name: icos-agent
+description: A Helm chart for the ICOS Agent
+type: application
+version: 2.0.0
+appVersion: "2.0.0"
+
+dependencies:
+- name: ocm-descriptor
+  version: 0.1.0
+  condition: ocm-descriptor.enabled
+- name: nuvla-dm
+  version: 0.0.3
+  repository: oci://harbor.res.eng.it/icos/helm
+  condition: nuvla-dm.enabled
+- name: telemetruum-gateway
+  version: 0.1.0
+  repository: oci://harbor.res.eng.it/icos/helm
+  condition: telemetruum-gateway.enabled

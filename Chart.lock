@@ -1,0 +1,12 @@
+dependencies:
+- name: ocm-descriptor
+  repository: ""
+  version: 0.1.0
+- name: nuvla-dm
+  repository: oci://harbor.res.eng.it/icos/helm
+  version: 0.0.3
+- name: telemetruum-gateway
+  repository: oci://harbor.res.eng.it/icos/helm
+  version: 0.1.0
+digest: sha256:ac4bdda2921d1d040daae97dbb7d41dcfcbc69324f26c28904cbffb867a4b756
+generated: "2024-08-02T16:58:48.637934513+02:00"

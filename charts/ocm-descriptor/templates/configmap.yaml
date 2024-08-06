@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ocm-descriptor.fullname" . }}-configmap
+data:
+  SERVER_PORT: {{ tpl (.Values.configMap.serverPort | quote) . }}
+  LIGHTHOUSE_BASE_URL: {{ tpl .Values.configMap.lighthouseBaseUrl . | quote }}
+  MATCHMAKING_URL: {{ tpl .Values.configMap.matchmakingUrl . | quote }}
+  KEYCLOAK_PUBLIC_KEY: {{ tpl .Values.configMap.keycloakPublicKey . | quote }}
+  JOBMANAGER_URL: {{ tpl .Values.configMap.jobManagerUrl . | quote }}
+  KEYCLOAK_BASE_URL: {{ tpl .Values.configMap.keycloakBaseUrl . | quote }}
+  KEYCLOAK_REALM: {{ tpl .Values.configMap.keycloakRealm . | quote }}
+  KEYCLOAK_CLIENT_ID: {{ tpl .Values.configMap.keycloakClientId . | quote }}
+  KEYCLOAK_CLIENT_SECRET: {{ tpl .Values.configMap.keycloakClientSecret . | quote }}
+  DEPLOY_MANAGER_URL: {{ tpl .Values.configMap.deployManagerUrl . | quote }}
+  DEPLOY_MANAGER_PULLING_INVERVAL: {{ tpl .Values.configMap.deployManagerPullingInverval . | quote }}

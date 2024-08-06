@@ -1,0 +1,95 @@
+global:
+  icos:
+    # -- id of the agent
+    # @section -- Main
+    agentId:
+    # -- endpoint of the ICOS Controller
+    # @section -- Main
+    controllerHost:
+
+    jobManager:
+      baseUrl: "http://{{ tpl .Values.global.icos.controllerHost . }}:32300"
+    telemetruumHub:
+      baseUrl: "http://{{ tpl .Values.global.icos.controllerHost . }}:32103"
+
+    lighthouse:
+      # -- endponint of the Lighthouse
+      # @section -- Main
+      baseUrl: http://replace-with-light-house-url
+      apiUrl: "{{ tpl .Values.global.icos.lighthouse.baseUrl . }}/api/v3"
+    
+    iam:
+      # -- endpoint of the IAM service
+      # @section -- Main
+      baseUrl: https://replace-with-keycloak-url
+      # -- realm of the IAM service
+      # @section -- Main
+      realm: icos-realm
+      # -- public key of the IAM service
+      # @section -- Main
+      publicKey: replace-with-realm-public-key
+      tokenUrl: "{{ .Values.global.icos.iam.baseUrl }}/realms/{{ .Values.global.icos.iam.realm }}/protocol/openid-connect/token"
+    ocmDM:
+      # -- Deployment Manger clientId
+      # @section -- OCM
+      iamClientId: nuvla-dm-client-id
+      # -- Deployment Manger clientSecret
+      # @section -- Nuvla
+      iamClientSecret: nuvla-dm-client-secret
+    nuvlaDM:
+      # -- Deployment Manger clientId
+      # @section -- OCM
+      iamClientId: nuvla-dm-client-id
+      # -- Deployment Manger clientSecret
+      # @section -- Nuvla
+      iamClientSecret: nuvla-dm-client-secret
+      # -- Nuvla apiKey
+      # @section -- Nuvla
+      nuvlaApiKey: nuvla-key
+      # -- Nuvla apiSecret
+      # @section -- Nuvla
+      nuvlaApiSecret: nuvla-secret
+#
+# OCM Deployment Manager
+#
+ocm-descriptor:
+  # -- Enable OCM Deployment Manager
+  # @section -- OCM
+  enabled: false
+  configMap:
+    lighthouseBaseUrl: "{{ tpl .Values.global.icos.lighthouse.baseUrl . }}"
+    keycloakPublicKey: "{{ .Values.global.icos.iam.publicKey }}"
+    jobManagerUrl: "{{ tpl .Values.global.icos.jobManager.baseUrl . }}/"
+    keycloakBaseUrl: "{{ tpl .Values.global.icos.iam.baseUrl . }}"
+    keycloakRealm: "{{ .Values.global.icos.iam.realm }}"
+    keycloakClientId: "{{ tpl .Values.global.icos.ocmDM.iamClientId . }}"
+    keycloakClientSecret: "{{ tpl .Values.global.icos.ocmDM.iamClientSecret . }}"
+
+
+#
+# Nuvla Deployment Manager
+#
+nuvla-dm:
+  # -- Enable Nuvla Deployment Manager
+  # @section -- Nuvla
+  enabled: false
+  icos:
+    jobManager:
+      url: "{{ tpl .Values.global.icos.jobManager.baseUrl . }}"
+    iam:
+      authUrl: "{{ tpl .Values.global.icos.iam.tokenUrl . }}"
+      clientId: "{{ tpl .Values.global.icos.nuvlaDM.iamClientId . }}"
+      clientSecret: "{{ tpl .Values.global.icos.nuvlaDM.iamClientSecret . }}"
+  nuvla:
+    apiKey: "{{ tpl .Values.global.icos.nuvlaDM.nuvlaApiKey . }}"
+    apiSecret: "{{ tpl .Values.global.icos.nuvlaDM.nuvlaApiSecret . }}"
+
+
+#
+# Telemetruum Gateway
+#
+
+telemetruum-gateway:
+  enabled: true
+  telemetruumHubEndpoint: "{{ tpl .Values.global.icos.telemetruumHub.baseUrl . }}"
+  agentId: "{{ tpl .Values.global.icos.agentId . }}"
